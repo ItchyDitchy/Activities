@@ -4,11 +4,15 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-public class CalculatorDemo extends JFrame {
+public class CalculatorDemo extends JFrame implements MouseListener, MouseMotionListener {
 
     // Calculation
     String currentNumberString = "";
@@ -26,9 +30,20 @@ public class CalculatorDemo extends JFrame {
     Color colorNumberBG = Color.decode("#70708e");
 
     // Font Configurations
-    String primaryFont = "Castelar";
     String secondaryFont = "Tahoma";
     Font archiaFont;
+
+    // Listeners
+    final MouseAdapter mouseAdapter = new MouseAdapter() {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        }
+        @Override
+        public void mouseExited(MouseEvent e) {
+            setCursor(Cursor.getDefaultCursor());
+        }
+    };
 
     /**
      * Launch the application.
@@ -37,8 +52,10 @@ public class CalculatorDemo extends JFrame {
     public static void main(String[] args) {
         startCalculator();
     }
+
     String formatNumber(Double number) {
-        return new DecimalFormat("#.##").format(number);
+        String format = new DecimalFormat("#.##").format(number);
+        return format.equals("-0") ? "0" : format;
     }
 
     static void startCalculator() {
@@ -68,13 +85,18 @@ public class CalculatorDemo extends JFrame {
         // Setup Frame
         setTitle("Calculator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 300, 430);
+        setBounds(100, 100, 290, 395);
         setResizable(false);
         JPanel contentPane = new JPanel();
         contentPane.setBackground(Color.decode("#15151c"));
         contentPane.setBorder(null);
-        setContentPane(contentPane);
         contentPane.setLayout(null);
+        setContentPane(contentPane);
+        this.setUndecorated(true);
+
+        // Listeners
+        addMouseListener(this);
+        addMouseMotionListener(this);
 
         // Setup Text Display
         JTextField textDisplay = new JTextField();
@@ -97,7 +119,7 @@ public class CalculatorDemo extends JFrame {
                         throw new RuntimeException(e);
                     }
 
-                    if (newText.matches("^-?[0-9]*\\.?[0-9]*$")) {
+                    if (newText.matches("^-?(0|[1-9][0-9]*)?(\\.[0-9]*)?$")) {
                         super.insertString(fb, offset, text, attr);
                     }
                 }
@@ -106,7 +128,7 @@ public class CalculatorDemo extends JFrame {
                 public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                     String newText = fb.getDocument().getText(0, fb.getDocument().getLength()).substring(0, offset) + text + fb.getDocument().getText(offset + length, fb.getDocument().getLength() - offset - length);
 
-                    if (newText.matches("^-?[0-9]*\\.?[0-9]*$")) {
+                    if (newText.matches("^-?(0|[1-9][0-9]*)?(\\.[0-9]*)?$")) {
                         super.replace(fb, offset, length, text, attrs);
                     }
                 }
@@ -121,10 +143,23 @@ public class CalculatorDemo extends JFrame {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setBounds(0, 5, 300, getHeight("CALCULATOR", labelFont));
         contentPane.add(title);
-        
+
+        // Close Button
+        JButton closeButton = new JButton("✕");
+        closeButton.addActionListener(e -> System.exit(0));
+        closeButton.setFont(closeButton.getFont().deriveFont(Font.BOLD, 24f));
+        closeButton.setForeground(Color.white);
+        closeButton.setBackground(Color.decode("#bd2e37"));
+        closeButton.setBounds(260,5,20,20);
+        closeButton.setFocusPainted(false);
+        closeButton.setHorizontalAlignment(SwingConstants.LEFT);
+        closeButton.setBorder(null);
+        contentPane.add(closeButton);
+
         // Clear Button
         JButton acButton = new JButton("AC");
         acButton.addActionListener(e -> textDisplay.setText(""));
+        acButton.addMouseListener(mouseAdapter);
         acButton.setFont(new Font(secondaryFont, Font.BOLD, 15));
         acButton.setForeground(Color.white);
         acButton.setBackground(Color.decode("#e5b900"));
@@ -141,6 +176,7 @@ public class CalculatorDemo extends JFrame {
                 textDisplay.setText(text.substring(0, text.length() - 1));
             }
         });
+        backspaceButton.addMouseListener(mouseAdapter);
         backspaceButton.setFont(new Font("Wingdings", Font.BOLD, 15));
         backspaceButton.setForeground(Color.white);
         backspaceButton.setBackground(Color.decode("#e5b900"));
@@ -153,6 +189,7 @@ public class CalculatorDemo extends JFrame {
         Font numberFont = archiaFont.deriveFont(Font.BOLD, 20f);
         JButton oneButton = new JButton("1");
         oneButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "1"));
+        oneButton.addMouseListener(mouseAdapter);
         oneButton.setFont(numberFont);
         oneButton.setForeground(Color.white);
         oneButton.setBackground(colorNumberBG);
@@ -163,6 +200,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton twoButton = new JButton("2");
         twoButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "2"));
+        twoButton.addMouseListener(mouseAdapter);
         twoButton.setFont(numberFont);
         twoButton.setForeground(Color.white);
         twoButton.setBackground(colorNumberBG);
@@ -173,6 +211,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton threeButton = new JButton("3");
         threeButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "3"));
+        threeButton.addMouseListener(mouseAdapter);
         threeButton.setFont(numberFont);
         threeButton.setForeground(Color.white);
         threeButton.setBackground(colorNumberBG);
@@ -183,6 +222,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton fourButton = new JButton("4");
         fourButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "4"));
+        fourButton.addMouseListener(mouseAdapter);
         fourButton.setFont(numberFont);
         fourButton.setForeground(Color.white);
         fourButton.setBackground(colorNumberBG);
@@ -193,6 +233,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton fiveButton = new JButton("5");
         fiveButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "5"));
+        fiveButton.addMouseListener(mouseAdapter);
         fiveButton.setFont(numberFont);
         fiveButton.setForeground(Color.white);
         fiveButton.setBackground(colorNumberBG);
@@ -203,6 +244,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton sixButton = new JButton("6");
         sixButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "6"));
+        sixButton.addMouseListener(mouseAdapter);
         sixButton.setFont(numberFont);
         sixButton.setForeground(Color.white);
         sixButton.setBackground(colorNumberBG);
@@ -213,6 +255,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton sevenButton = new JButton("7");
         sevenButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "7"));
+        sevenButton.addMouseListener(mouseAdapter);
         sevenButton.setFont(numberFont);
         sevenButton.setForeground(Color.white);
         sevenButton.setBackground(colorNumberBG);
@@ -223,6 +266,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton eightButton = new JButton("8");
         eightButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "8"));
+        eightButton.addMouseListener(mouseAdapter);
         eightButton.setFont(numberFont);
         eightButton.setForeground(Color.white);
         eightButton.setBackground(colorNumberBG);
@@ -233,6 +277,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton nineButton = new JButton("9");
         nineButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "9"));
+        nineButton.addMouseListener(mouseAdapter);
         nineButton.setFont(numberFont);
         nineButton.setForeground(Color.white);
         nineButton.setBackground(colorNumberBG);
@@ -243,6 +288,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton zeroButton = new JButton("0");
         zeroButton.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "0"));
+        zeroButton.addMouseListener(mouseAdapter);
         zeroButton.setFont(numberFont);
         zeroButton.setForeground(Color.white);
         zeroButton.setBackground(colorNumberBG);
@@ -253,6 +299,7 @@ public class CalculatorDemo extends JFrame {
 
         JButton decimalPoint = new JButton(".");
         decimalPoint.addActionListener(e -> textDisplay.setText(textDisplay.getText() + "."));
+        decimalPoint.addMouseListener(mouseAdapter);
         decimalPoint.setFont(numberFont);
         decimalPoint.setForeground(Color.white);
         decimalPoint.setBackground(colorNumberBG);
@@ -273,6 +320,7 @@ public class CalculatorDemo extends JFrame {
             operation = "/";
             textDisplay.setText("");
         });
+        divideButton.addMouseListener(mouseAdapter);
         divideButton.setFont(operationFont);
         divideButton.setForeground(Color.white);
         divideButton.setBackground(colorOperationBG);
@@ -290,6 +338,7 @@ public class CalculatorDemo extends JFrame {
             operation = "*";
             textDisplay.setText("");
         });
+        multiplyButton.addMouseListener(mouseAdapter);
         multiplyButton.setFont(operationFont);
         multiplyButton.setForeground(Color.white);
         multiplyButton.setBackground(colorOperationBG);
@@ -307,6 +356,7 @@ public class CalculatorDemo extends JFrame {
             operation = "-";
             textDisplay.setText("");
         });
+        subtractButton.addMouseListener(mouseAdapter);
         subtractButton.setFont(operationFont);
         subtractButton.setForeground(Color.white);
         subtractButton.setBackground(colorOperationBG);
@@ -324,6 +374,7 @@ public class CalculatorDemo extends JFrame {
             operation = "+";
             textDisplay.setText("");
         });
+        addButton.addMouseListener(mouseAdapter);
         addButton.setFont(operationFont);
         addButton.setForeground(Color.white);
         addButton.setBackground(colorOperationBG);
@@ -341,6 +392,7 @@ public class CalculatorDemo extends JFrame {
             operation = "%";
             textDisplay.setText("");
         });
+        modularButton.addMouseListener(mouseAdapter);
         modularButton.setFont(operationFont);
         modularButton.setForeground(Color.white);
         modularButton.setBackground(colorOperationBG);
@@ -359,9 +411,9 @@ public class CalculatorDemo extends JFrame {
                 textDisplay.setText(text.substring(1,text.length()));
                 return;
             }
-            System.out.println("");
             textDisplay.setText("-" + text);
         });
+        toggleNegativeButton.addMouseListener(mouseAdapter);
         toggleNegativeButton.setFont(operationFont);
         toggleNegativeButton.setForeground(Color.white);
         toggleNegativeButton.setBackground(colorOperationBG);
@@ -376,7 +428,13 @@ public class CalculatorDemo extends JFrame {
 
             newNumberString = textDisplay.getText();
 
-            if (currentNumberString.isEmpty() || newNumberString.isEmpty()) {
+            if (currentNumberString.isEmpty()) {
+                return;
+            }
+            if (newNumberString.isEmpty()) {
+                return;
+            }
+            if (operation.isEmpty()) {
                 return;
             }
 
@@ -390,9 +448,10 @@ public class CalculatorDemo extends JFrame {
                 case "*" -> answer = currentNumber * newNumber;
                 case "%" -> answer = currentNumber % newNumber;
             }
-
+            operation = "";
             textDisplay.setText(formatNumber(answer));
         });
+        equalButton.addMouseListener(mouseAdapter);
         equalButton.setFont(operationFont);
         equalButton.setForeground(Color.white);
         equalButton.setBackground(Color.decode("#189a1c"));
@@ -417,5 +476,35 @@ public class CalculatorDemo extends JFrame {
 
     public Rectangle getButtonBounds(int x, int y) {
         return new Rectangle(buttonXIndex+(3+buttonWidth)*x, buttonYIndex+(3+buttonHeight)*y, buttonWidth, buttonHeight);
+    }
+
+    // Mouse Handling
+    private int mouseX;
+    private int mouseY;
+
+    public void mousePressed(MouseEvent e) {
+        mouseX = e.getX();
+        mouseY = e.getY();
+    }
+
+    public void mouseDragged(MouseEvent e) {
+        setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+        int newX = e.getXOnScreen() - mouseX;
+        int newY = e.getYOnScreen() - mouseY;
+        setLocation(newX, newY);
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        setCursor(Cursor.getDefaultCursor());
+    }
+
+    public void mouseMoved(MouseEvent e) {}
+
+    public void mouseClicked(MouseEvent e) {}
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseExited(MouseEvent e) {
     }
 }
