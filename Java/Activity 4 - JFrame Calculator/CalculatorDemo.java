@@ -97,7 +97,7 @@ public class CalculatorDemo extends JFrame {
                         throw new RuntimeException(e);
                     }
 
-                    if (newText.matches("^[0-9]*\\.?[0-9]*$")) {
+                    if (newText.matches("^-?[0-9]*\\.?[0-9]*$")) {
                         super.insertString(fb, offset, text, attr);
                     }
                 }
@@ -106,7 +106,7 @@ public class CalculatorDemo extends JFrame {
                 public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                     String newText = fb.getDocument().getText(0, fb.getDocument().getLength()).substring(0, offset) + text + fb.getDocument().getText(offset + length, fb.getDocument().getLength() - offset - length);
 
-                    if (newText.matches("^[0-9]*\\.?[0-9]*$")) {
+                    if (newText.matches("^-?[0-9]*\\.?[0-9]*$")) {
                         super.replace(fb, offset, length, text, attrs);
                     }
                 }
@@ -124,7 +124,7 @@ public class CalculatorDemo extends JFrame {
         
         // Clear Button
         JButton acButton = new JButton("AC");
-        acButton.addActionListener(e -> textDisplay.setText(null));
+        acButton.addActionListener(e -> textDisplay.setText(""));
         acButton.setFont(new Font(secondaryFont, Font.BOLD, 15));
         acButton.setForeground(Color.white);
         acButton.setBackground(Color.decode("#e5b900"));
@@ -270,8 +270,8 @@ public class CalculatorDemo extends JFrame {
                 return;
             }
             currentNumberString = textDisplay.getText();
-            operation = "*";
-            textDisplay.setText(null);
+            operation = "/";
+            textDisplay.setText("");
         });
         divideButton.setFont(operationFont);
         divideButton.setForeground(Color.white);
@@ -288,7 +288,7 @@ public class CalculatorDemo extends JFrame {
             }
             currentNumberString = textDisplay.getText();
             operation = "*";
-            textDisplay.setText(null);
+            textDisplay.setText("");
         });
         multiplyButton.setFont(operationFont);
         multiplyButton.setForeground(Color.white);
@@ -305,7 +305,7 @@ public class CalculatorDemo extends JFrame {
             }
             currentNumberString = textDisplay.getText();
             operation = "-";
-            textDisplay.setText(null);
+            textDisplay.setText("");
         });
         subtractButton.setFont(operationFont);
         subtractButton.setForeground(Color.white);
@@ -321,8 +321,8 @@ public class CalculatorDemo extends JFrame {
                 return;
             }
             currentNumberString = textDisplay.getText();
-            operation = addButton.getText();
-            textDisplay.setText(null);
+            operation = "+";
+            textDisplay.setText("");
         });
         addButton.setFont(operationFont);
         addButton.setForeground(Color.white);
@@ -339,7 +339,7 @@ public class CalculatorDemo extends JFrame {
             }
             currentNumberString = textDisplay.getText();
             operation = "%";
-            textDisplay.setText(null);
+            textDisplay.setText("");
         });
         modularButton.setFont(operationFont);
         modularButton.setForeground(Color.white);
@@ -348,6 +348,27 @@ public class CalculatorDemo extends JFrame {
         modularButton.setBorder(null);
         modularButton.setFocusPainted(false);
         contentPane.add(modularButton);
+
+        JButton toggleNegativeButton = new JButton("+/-");
+        toggleNegativeButton.addActionListener(e -> {
+            if (textDisplay.getText().isEmpty()) {
+                return;
+            }
+            String text = textDisplay.getText();
+            if (text.startsWith("-")) {
+                textDisplay.setText(text.substring(1,text.length()));
+                return;
+            }
+            System.out.println("");
+            textDisplay.setText("-" + text);
+        });
+        toggleNegativeButton.setFont(operationFont);
+        toggleNegativeButton.setForeground(Color.white);
+        toggleNegativeButton.setBackground(colorOperationBG);
+        toggleNegativeButton.setBounds(getButtonBounds(0,4));
+        toggleNegativeButton.setBorder(null);
+        toggleNegativeButton.setFocusPainted(false);
+        contentPane.add(toggleNegativeButton);
 
         JButton equalButton = new JButton("=");
         equalButton.addActionListener(e -> {
@@ -372,8 +393,8 @@ public class CalculatorDemo extends JFrame {
 
             textDisplay.setText(formatNumber(answer));
         });
-        divideButton.setFont(operationFont);
-        divideButton.setForeground(Color.white);
+        equalButton.setFont(operationFont);
+        equalButton.setForeground(Color.white);
         equalButton.setBackground(Color.decode("#189a1c"));
         equalButton.setBounds(getButtonBounds(3,4));
         equalButton.setBorder(null);
