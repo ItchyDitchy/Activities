@@ -107,6 +107,7 @@ public class CalculatorDemo extends JFrame implements MouseListener, MouseMotion
         textDisplay.setBounds(10, 30, 270, 80);
         contentPane.add(textDisplay);
         textDisplay.setColumns(10);
+        textDisplay.setHorizontalAlignment(SwingConstants.RIGHT);
 
         {
             ((AbstractDocument) textDisplay.getDocument()).setDocumentFilter(new DocumentFilter() {
