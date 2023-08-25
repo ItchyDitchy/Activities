@@ -1,0 +1,55 @@
+# C++
+# Compiled object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+*.ilk
+*.pdb
+
+# Libraries
+*.dll
+*.so
+*.dylib
+
+# IDE and editor files
+.vscode/
+*.vscode/
+*.code-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sdf
+*.opensdf
+*.cproj
+*.dotsettings
+*.builds
+*.pidb
+*.user
+*.aps
+*.resharper*
+*.suo
+*. suo
+*. suo
+*. suo
+*. suo
+
+# Dependency directories
+/bin/
+/build/
+/lib/
+/obj/
+/Debug/
+/Release/
+/x64/
+/x86/
+
+# macOS specific files
+.DS_Store
+
+# Compiled Python files
+*.pyc
+__pycache__/
