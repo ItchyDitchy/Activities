@@ -1,5 +1,6 @@
 # C++
 # Compiled object files
+*.out
 *.o
 *.obj
 
