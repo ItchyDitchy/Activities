@@ -29,9 +29,10 @@ int main() {
 
     // Output Data
     system("cls");
+    int width = 34;
     string header = "++++++++++PAYROLL SYSTEM++++++++++";
     cout << setw((56-header.length())/2.0) << left << "" << header << "\n\n";
-    cout << setw(35) << left << ("NAME: " + name) << setw(20) << ("CIVIL STATUS: " + civilStatus);
+    cout << setw(width) << left << ("NAME: " + name) << setw(20) << ("CIVIL STATUS: " + civilStatus);
     cout << setw(35) << left << ("\nADDRESS: " + address) << setw(20) << ("GENDER: " + gender);
     cout << "\n";
     cout << setw(35) << left << "\nINCOME" << setw(20) << "DEDUCTIONS\n";
