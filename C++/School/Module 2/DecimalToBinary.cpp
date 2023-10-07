@@ -4,9 +4,8 @@ using namespace std;
 int main() {
  
  int decimal, binary = 0, remainder, product = 1;
-  // Since the data type is int, it can only accept values up to 1023 before switching to long.
-  cout<<"DECIMAL TO BINARY CONVERSION"<<endl;
-  cout<<endl;
+  cout<<"DECIMAL TO BINARY CONVERSION" << endl;
+  cout<< endl;
   cout<<"Enter a number [1-1023]: ";
   cin >> decimal;
   while (decimal != 0) {

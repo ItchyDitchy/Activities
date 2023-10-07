@@ -12,7 +12,6 @@ int main() {
         decimal += remainder * product;
         product *= 2;
         binary /= 10;
-        cout << "r: " << remainder << " | d: " << decimal << " | p: " << product << " | b: " << binary << endl;
     }
-    cout << "The number in the decimal form is: " << decimal;
+    cout << "The number in decimal form is: " << decimal;
 }
