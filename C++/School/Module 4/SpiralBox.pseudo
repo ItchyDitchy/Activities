@@ -1,0 +1,36 @@
+START
+	INPUT maxX, maxY
+	SET x = 1, y = 1, minX = 1, minY = 1
+	SYSTEM CLEAR SCREEN
+	WHILE minX < maxX OR minY < maxY THEN
+		DECREMENT maxX
+		WHILE x < maxX THEN
+			INCREMENT x
+			GotoXY x, y
+			OUTPUT "."
+			SLEEP delay
+		ENDWHILE
+		DECREMENT maxY
+		WHILE y < maxY THEN
+			INCREMENT y
+			GotoXY x, y
+			OUTPUT ":"
+			SLEEP delay
+		ENDWHILE
+		INCREMENT minX
+		WHILE x > minX THEN
+			DECREMENT x
+			GotoXY x, y
+			OUTPUT "|"
+			SLEEP delay
+		ENDWHILE
+		INCREMENT minX
+		WHILE y > minY THEN
+			DECREMENT y
+			GotoXY x, y
+			OUTPUT "#"
+			SLEEP delay
+		ENDWHILE
+	ENDWHILE
+	PAUSE
+END
