@@ -10,18 +10,3 @@ START
         INCREMENT x
     ENDWHILE
 END
-
-
-START
-SET X=5, Y=1
-    WHILE X<=5
-     WHILE X>=y
-     PRINT "*"
-    DECREMENT x
-    PRINT "\n"
-    INCREMENT Y
-    set x=5
-
-
-
-END
