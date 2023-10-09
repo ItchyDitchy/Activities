@@ -1,0 +1,27 @@
+START
+    SET x = 1
+    WHILE x <= 5
+        SET y = 1
+        INCREMENT y
+        WHILE y <= x
+            OUTPUT "*"
+        ENDWHILE
+        OUTPUT "\n"
+        INCREMENT x
+    ENDWHILE
+END
+
+
+START
+SET X=5, Y=1
+    WHILE X<=5
+     WHILE X>=y
+     PRINT "*"
+    DECREMENT x
+    PRINT "\n"
+    INCREMENT Y
+    set x=5
+
+
+
+END
