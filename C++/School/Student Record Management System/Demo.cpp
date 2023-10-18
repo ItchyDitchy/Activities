@@ -33,7 +33,7 @@ boolean update() {
     cout << WHT << "┏" << StringUtility::repeatCharacter("━",104) << "┓" << "\n";
     cout <<        "┃" << setw(35) << BCYN << "Student User Interface - ItchyDitchy v0.0.01" << setw(39) << WHT << "┃" << "\n";
     cout << WHT << "┣" << StringUtility::repeatCharacter("━",26) << "┳" << StringUtility::repeatCharacter("━",77) << "┫" << "\n";
-    cout << setw(1) << left << (page == "Dashboard"             ?   "┣━" + string(BWHT) : "┃ ") << setw(columnGap1) << " Dashboard" << input               << string(WHT)   << setw(1) << (page == "Dashboard"              ? "━┫" : " ┃") << setw(77) << ""  << setw(1) << "┃" << "\n";
+    cout << setw(1) << left << (page == "Dashboard"             ?   "┣━" + string(BWHT) : "┃ ") << setw(columnGap1) << " Dashboard" + string(WHT)   << setw(1) << (page == "Dashboard"              ? "━┫" : " ┃") << setw(77) << ""  << setw(1) << "┃" << "\n";
     cout << setw(1) << left << (page == "Student Records"       ?   "┣━" + string(BWHT) : "┃ ") << setw(columnGap1) << " Student Records"         + string(WHT)   << setw(1) << (page == "Student Records"        ? "━┫" : " ┃") << setw(77) << ""  << setw(1) << "┃" << "\n";
     cout << setw(1) << left << (page == "Student Registration"  ?   "┣━" + string(BWHT) : "┃ ") << setw(columnGap1) << " Student Registration"    + string(WHT)   << setw(1) << (page == "Student Registration"   ? "━┫" : " ┃") << setw(77) << ""  << setw(1) << "┃" <<  "\n";
     cout << setw(1) << left << (page == "Course Management"     ?   "┣━" + string(BWHT) : "┃ ") << setw(columnGap1) << " Course Management"       + string(WHT)   << setw(1) << (page == "Course Management"      ? "━┫" : " ┃") << setw(77) << ""  << setw(1) << "┃" << "\n";
