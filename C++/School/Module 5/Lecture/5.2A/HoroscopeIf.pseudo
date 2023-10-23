@@ -1,0 +1,61 @@
+START
+    DECLARE     month, day, monthText
+    DISPLAY     "Enter month: "
+    INPUT       month
+    DISPLAY     "Enter day: "
+    INPUT       day
+    IF          month < 1 OR month > 12
+        THEN
+            DISPLAY     "Invalid month!"
+    ENDIF
+    DECLARE     months[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}, zodiac
+    IF      (month == 1 AND day >= 20) OR (month == 2 AND day <= 18)
+        THEN
+            zodiac = "Aqurius"
+    ELSE
+    IF (month == 2 AND day >= 19) OR (month == 3 AND day <= 20)
+        THEN
+        SET     zodiac = "Pisces"
+    ELSE
+    IF (month == 3 AND day >= 21) OR (month == 4 AND day <= 19)
+        THEN
+        SET     zodiac = "Aries"
+    ELSE 
+    IF (month == 4 AND day >= 20) OR (month == 5 AND day <= 20)
+        THEN
+        SET     zodiac = "Taurus"
+    ELSE 
+    IF (month == 5 AND day >= 20) OR (month == 6 AND day <= 20)
+        THEN
+        SET     zodiac = "Gemini"
+    ELSE 
+    IF (month == 6 AND day >= 21) OR (month == 7 AND day <= 22)
+        THEN
+        SET     zodiac = "Cancer"
+    ELSE 
+    IF (month == 7 AND day >= 21) OR (month == 8 AND day <= 22)
+        THEN
+        SET     zodiac = "Leo"
+    ELSE 
+    IF (month == 8 AND day >= 23) OR (month == 9 AND day <= 22)
+        THEN
+        SET     zodiac = "Virgo"
+    ELSE 
+    IF (month == 9 AND day >= 23) OR (month == 10 AND day <= 22)
+        THEN
+        SET     zodiac = "Libra"
+    ELSE 
+    IF (month == 10 AND day >= 23) OR (month == 11 AND day <= 21)
+        THEN
+        SET     zodiac = "Scorpio"
+    ELSE 
+    IF (month == 11 AND day >= 22) OR (month == 12 AND day <= 21)
+        THEN
+        SET     zodiac = "Sagittarius"
+    ELSE 
+    IF (month == 12 AND day >= 22) OR (month == 1 AND day <= 19)
+        THEN
+        SET     zodiac = "Capricorn"
+    ELSE
+        DISPLAY     "Invalid date!"
+END

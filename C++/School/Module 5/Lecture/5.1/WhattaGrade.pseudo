@@ -1,0 +1,20 @@
+START
+    DECLARE     grade1, grade2, grade3, gradeAvg, gradeSUM
+    SYSTEM      CLEAR SCREEN
+    DISPLAY     "\t\t\t Whatta Grade!!!\n"
+    DISPLAY     "Enter Grade 1: "
+    INPUT       grade1
+    DISPLAY     "Enter Grade 2: "
+    INPUT       grade2
+    DISPLAY     "Enter Grade 3: "
+    INPUT       grade3
+    CALCULATE   gradeSUM = grade1 + grade2 + grade3
+    CALCULATE   gradeAvg = gradeSUM/3;
+    DISPLAY     "The average of the three(3) exams is: " + gradeAvg
+    IF          gradeAvg >= 70
+        THEN
+            DISPLAY     " :-)\n"
+        ELSE
+            DISPLAY     " :-(\n"
+    ENDIF
+END

@@ -1,0 +1,39 @@
+START
+    DECLARE     shapeChar
+    DISPLAY     "Volume of Figures\n"
+    DISPLAY     "[C] - Cube\n"
+    DISPLAY     "[R] - Rectangular Prism\n"
+    DISPLAY     "[S] - Sphere\n\n"
+    DISPLAY     "Choose figure: "
+    INPUT       shapeChar
+    SWITCH      shapeChar
+        CASE    'C', 'c':
+            DISPLAY     "You have chosen Cube\n"
+            DECLARE     side, volume
+            OUTPUT      "Enter side: "
+            INPUT       side
+            CALCULATE   volume = side*side*side
+            DISPLAY     "The volume of the Cube is: " + volume
+            EXIT SWITCH
+        CASE    'R', 'r':
+            DISPLAY     "You have chosen Rectangular Prism\n"
+            DECLARE     width, length, height, volume
+            OUTPUT      "Enter width: "
+            INPUT       width
+            OUTPUT      "Enter length: "
+            INPUT       length
+            OUTPUT      "Enter height: "
+            INPUT       height
+            CALCULATE   volume = width*length*height
+            DISPLAY     "The volume of the Rectangular Prism is: " + volume
+            EXIT SWITCH
+        CASE    'S', 's':
+            DISPLAY     "You have chosen Sphere\n"
+            DECLARE     radius, volume
+            INPUT       radius
+            CALCULATE   volume = radius*radius*4/3*3.14
+            DISPLAY     "The volume of the Sphere is: " + volume
+        Default:
+            DISPLAY     "Invalid input."
+            EXIT SWITCH
+END

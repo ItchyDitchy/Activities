@@ -14,21 +14,21 @@ void draw(int maxX, int maxY, int delay) {
     maxX--; 
     while (x < maxX && minX < maxX && minY < maxY) {
       gotoxy(++x, y);
-      printf("-");
+      printf(".");
       Sleep(delay);
     }
 
     maxY--;
     while (y < maxY && minX < maxX && minY < maxY) {
       gotoxy(x, ++y);
-      printf("+");
+      printf("-");
       Sleep(delay);
     }
 
     minX++;
     while (x > minX && minX < maxX && minY < maxY) {
       gotoxy(--x, y);
-      printf("|");
+      printf("+");
       Sleep(delay);
     }
 
