@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -8,77 +9,45 @@ int main() {
     cin >> month;
     cout << "Enter day: ";
     cin >> day;
-    string monthText;
     switch (month) {
         case 1:
-            monthText = "January";
+            cout << "Zodiac sign for January " << day << " is " << (day >= 20 ? "Aquarius" : "Capricorn");
             break;
         case 2:
-            monthText = "February";
+            cout << "Zodiac sign for February " << day << " is " << (day >= 19 ? "Pisces" : "Aquarius");
             break;
         case 3:
-            monthText = "March";
+            cout << "Zodiac sign for March " << day << " is " << (day >= 21 ? "Aries" : "Pisces");
             break;
         case 4:
-            monthText = "April";
+            cout << "Zodiac sign for April " << day << " is " << (day >= 20 ? "Taurus" : "Aries");
             break;
         case 5:
-            monthText = "May";
+            cout << "Zodiac sign for May " << day << " is " << (day >= 20 ? "Gemini" : "Taurus");
             break;
         case 6:
-            monthText = "June";
+            cout << "Zodiac sign for June " << day << " is " << (day >= 21 ? "Cancer" : "Gemini");
             break;
         case 7:
-            monthText = "July";
+            cout << "Zodiac sign for July " << day << " is " << (day >= 21 ? "Leo" : "Cancer");
             break;
         case 8:
-            monthText = "August";
+            cout << "Zodiac sign for August " << day << " is " << (day >= 23 ? "Virgo" : "Leo");
             break;
         case 9:
-            monthText = "September";
+            cout << "Zodiac sign for September " << day << " is " << (day >= 23 ? "Libra" : "Virgo");
             break;
         case 10:
-            monthText = "October";
+            cout << "Zodiac sign for October " << day << " is " << (day >= 23 ? "Scorpio" : "Libra");
             break;
         case 11:
-            monthText = "November";
+            cout << "Zodiac sign for November " << day << " is " << (day >= 22 ? "Sagittarius" : "Scorpio");
             break;
         case 12:
-            monthText = "December";
+            cout << "Zodiac sign for December " << day << " is " << (day >= 22 ? "Capricorn" : "Sagittarius");
             break;
         default:
-            cout << "Invalid month!";
-            return 0;
+            cout << "Invalid date!";
     }
-    string zodiac;
-    if ((month == 1 && day >= 20) || (month == 2 && day <= 18))
-        zodiac = "Aquarius";
-    else if ((month == 2 && day >= 19) || (month == 3 && day <= 20))
-        zodiac = "Pisces";
-    else if ((month == 3 && day >= 21) || (month == 4 && day <= 19))
-        zodiac = "Aries";
-    else if ((month == 4 && day >= 20) || (month == 5 && day <= 20))
-        zodiac = "Taurus";
-    else if ((month == 5 && day >= 20) || (month == 6 && day <= 20))
-        zodiac = "Gemini";
-    else if ((month == 6 && day >= 21) || (month == 7 && day <= 22))
-        zodiac = "Cancer";
-    else if ((month == 7 && day >= 21) || (month == 8 && day <= 22))
-        zodiac = "Leo";
-    else if ((month == 8 && day >= 23) || (month == 9 && day <= 22))
-        zodiac = "Virgo";
-    else if ((month == 9 && day >= 23) || (month == 10 && day <= 22))
-        zodiac = "Libra";
-    else if ((month == 10 && day >= 23) || (month == 11 && day <= 21))
-        zodiac = "Scorpio";
-    else if ((month == 11 && day >= 22) || (month == 12 && day <= 21))
-        zodiac = "Sagittarius";
-    else if ((month == 12 && day >= 22) || (month == 1 && day <= 19))
-        zodiac = "Capricorn";
-    else {
-        cout << "Invalid date!";
-        return 0;
-    }
-    cout << "Zodiac sign for " << monthText << " " << day << " is " << zodiac;
     return 0;
 }
