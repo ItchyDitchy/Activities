@@ -1,26 +1,36 @@
-FOR n = 0 to 2
-    DISPLAY n + " "
-END FOR
+START
+    FOR n = 0 to 2
+        DISPLAY n + " "
+    END FOR
+END
 
-SET n = 5
-WHILE n > 1
-    DISPLAY n + " "
-    DECREMENT n
-END WHILE
+START
+    SET n = 5
+    WHILE n > 1
+        DISPLAY n + " "
+        DECREMENT n
+    END WHILE
+END
 
-FOR n = 1 to 10
-    DISPLAY n + " "
-END FOR
+START
+    FOR n = 1 to 10
+        DISPLAY n + " "
+    END FOR
+END
 
-SET n = 7
-DO
-    DISPLAY n + " "
-    DECREMENT n
-WHILE n >= 1
-END DO
+START
+    SET n = 7
+    DO
+        DISPLAY n + " "
+        DECREMENT n
+    WHILE n >= 1
+    END DO
+END
 
-SET n = 1
-WHILE n > 1
-    DISPLAY n + " "
-    DECREMENT n
-END WHILE
+START
+    SET n = 1
+    WHILE n > 1
+        DISPLAY n + " "
+        DECREMENT n
+    END WHILE
+END
