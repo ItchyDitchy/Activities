@@ -18,14 +18,14 @@ int main(int argc, char** argv) {
 	cout << "Enter Grade 3: ";
     cin >> grade3;
 
-	gradeSUM = grade1+grade2+grade3;
-	gradeAvg = gradeSUM/3;
+	gradeSUM = grade1 + grade2 + grade3;
+	gradeAvg = gradeSUM / 3;
 
-	cout<<"The average of the three(3) exams is: " << gradeAvg;
+	cout << "The average of the three(3) exams is: " << gradeAvg;
 
 	if (gradeAvg >= 70)
-		cout<<" :-)"<<endl;
+		cout << " :-)" << endl;
 	else
-		cout<<" :-("<<endl;
+		cout << " :-(" << endl;
 	return 0;
 }
