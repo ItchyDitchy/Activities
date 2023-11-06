@@ -7,9 +7,6 @@ int main(int argc, char** argv) {
 	float grade1, grade2, grade3,
 	    gradeAvg, gradeSUM;
 
-
-	system("CLS");
-
 	cout << "\t\t\t Whatta Grade!!!" << endl;
 	cout << "Enter Grade 1: ";
     cin >> grade1;
