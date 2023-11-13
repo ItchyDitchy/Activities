@@ -7,10 +7,8 @@ int main() {
     cout << "Enter number: ";
     cin >> no;
     cout << "Multiplication Table of " << no << endl;
-
-    while (x <= 10) {
-        cout << no << " x " << x << " = " << no * x << "\n";
-        x++; 
-    }
+    
+    while (x <= 10)
+        cout << no << " x " << x << " = " << no * x++ << "\n"; 
     return 0;
 }
