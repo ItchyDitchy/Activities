@@ -15,7 +15,7 @@ int main() {
     std::cout << "The numbers are: ";
 
     while (start <= last) {
-        std::cout << start++;
+        std::cout << start++ << " ";
     }
     return 0;
 }
