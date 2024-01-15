@@ -115,12 +115,13 @@ std::string slots[5][26][6];
 
 void park();
 void unpark();
-int countSlots();
+int slotsLeft;
 int letterToNumber(char letter);
 
 std::string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 void parking() {
+    slotsLeft = 5*26*6;
     for (int x = 0; x < 5; x++)
         for (int y = 0; y < 26; y++)
             for (int z = 0; z < 6; z++)
@@ -131,7 +132,7 @@ void parking() {
         choice = 0;
         do {
             system("cls");
-            std::cout << "What would you like to do? Parking Slots Left: " << countSlots() << "\n";
+            std::cout << "What would you like to do? Parking Slots Left: " << slotsLeft << "\n";
             std::cout << "1. Park\n";
             std::cout << "2. Unpark\n";
             std::cout << "3. Exit\n";
@@ -185,6 +186,7 @@ void park() {
         } while (1 > column || column > 6);
 
         if (slots[floor][value][column] == "") {
+            slotsLeft--;
             slots[floor][value][column] = name;
             std::cout << "You have parked car \"" << name << "\" at floor " << floor << " at slot " << letter << column << ".\n";
             std::cout << "Click any character to continue.";
@@ -226,19 +228,10 @@ void unpark() {
     } else {
         std::cout << "The car \"" << slots[floor][value][column] << "\" has been unparked.\n";
         slots[floor][value][column] = "";
+        slotsLeft++;
     }
     std::cout << "Click any character to continue.";
     getch();
-}
-
-int countSlots() {
-    int sum = 5*26*6;
-    for (int x = 0; x < 5; x++)
-        for (int y = 0; y < 26; y++)
-            for (int z = 0; z < 6; z++)
-                if (slots[x][y][z] == "");
-                    sum--;
-    return sum;
 }
 
 int letterToNumber(char letter) {
