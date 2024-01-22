@@ -115,6 +115,7 @@ std::string slots[5][26][6];
 
 void park();
 void unpark();
+void previewParking();
 int slotsLeft;
 int letterToNumber(char letter);
 
@@ -135,10 +136,11 @@ void parking() {
             std::cout << "What would you like to do? Parking Slots Left: " << slotsLeft << "\n";
             std::cout << "1. Park\n";
             std::cout << "2. Unpark\n";
-            std::cout << "3. Exit\n";
-            std::cout << "[1-3] ";
+            std::cout << "3. Display Floor\n";
+            std::cout << "4. Exit\n";
+            std::cout << "[1-4] ";
             std::cin >> choice;
-        } while (1 > choice || choice > 3);
+        } while (1 > choice || choice > 4);
 
         switch (choice) {
             case 1:
@@ -148,6 +150,9 @@ void parking() {
                 unpark();
                 break;
             case 3:
+                previewParking();
+                break;
+            case 4:
                 system("cls");
                 std::cout << "Thank you for using the parking program.\n";
                 return;
@@ -185,9 +190,9 @@ void park() {
             std::cin >> column;
         } while (1 > column || column > 6);
 
-        if (slots[floor][value][column] == "") {
+        if (slots[floor-1][value-1][column-1] == "") {
             slotsLeft--;
-            slots[floor][value][column] = name;
+            slots[floor-1][value-1][column-1] = name;
             std::cout << "You have parked car \"" << name << "\" at floor " << floor << " at slot " << letter << column << ".\n";
             std::cout << "Click any character to continue.";
             getch();
@@ -223,14 +228,37 @@ void unpark() {
         std::cin >> column;
     } while (1 > column || column > 6);
 
-    if (slots[floor][value][column] == "") {
+    if (slots[floor-1][value-1][column-1] == "") {
         std::cout << "The slot is empty.\n";
     } else {
-        std::cout << "The car \"" << slots[floor][value][column] << "\" has been unparked.\n";
-        slots[floor][value][column] = "";
+        std::cout << "The car \"" << slots[floor-1][value-1][column-1] << "\" has been unparked.\n";
+        slots[floor-1][value-1][column-1] = "";
         slotsLeft++;
     }
     std::cout << "Click any character to continue.";
+    getch();
+}
+
+void previewParking() {
+    system("cls");
+    int floor = 0;
+    do {
+        std::cout << "Which floor would you like to preview? ";
+        std::cin >> floor;
+    } while (1 > floor || floor > 5);
+    system("cls");
+    std::cout << "\t\t\t\tPARKING AREA FOR FLOOR " << floor << "\n";
+    std::cout << "  ";
+    for (int i = 0; i < alphabet.length(); i++)
+        std::cout << " " << alphabet[i] << " ";
+    std::cout << "\n";
+    for (int z = 0; z < 6; z++) {
+        std::cout << z << " ";
+        for (int y = 0; y < 26; y++)
+            std::cout << (slots[floor-1][y][z] == "" ? "[ ]" : "[X]");
+        std::cout << "\n";
+    }
+    std::cout << "\nClick any character to continue.";
     getch();
 }
 
