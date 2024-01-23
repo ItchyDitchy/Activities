@@ -1,5 +1,8 @@
-#include <bits/stdc++.h>
 #include <conio.h>
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <unordered_map>
 #include "ColorImpl.h"
 
 std::string removeDuplicates(std::string text);
