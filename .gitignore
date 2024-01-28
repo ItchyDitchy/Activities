@@ -56,4 +56,5 @@
 __pycache__/
 
 tempCodeRunnerFile.cpp
-temp.cpp
+temp.*
+demo.*
