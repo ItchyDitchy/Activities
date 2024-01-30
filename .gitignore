@@ -1,4 +1,3 @@
-# C++
 # Compiled object files
 *.out
 *.o
@@ -55,6 +54,11 @@
 *.pyc
 __pycache__/
 
-tempCodeRunnerFile.cpp
+# Test files
+tempCodeRunnerFile.*
 temp.*
 demo.*
+
+# Database files
+database.txt
+*.db
