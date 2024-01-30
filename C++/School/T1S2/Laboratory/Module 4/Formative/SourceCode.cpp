@@ -36,16 +36,44 @@ int main() {
                 addRecord();
                 break;
             case 2:
+                if (players.size() == 0) {
+                    system("cls");
+                    std::cout << "This function is not available at the moment!";
+                    std::cout << "Click any key to continue.";
+                    getch();
+                    break;
+                }
                 viewPlayersRecord();
                 break;
             case 3:
+                if (players.size() == 0) {
+                    system("cls");
+                    std::cout << "This function is not available at the moment!";
+                    std::cout << "Click any key to continue.";
+                    getch();
+                    break;
+                }
                 viewAverage();
                 break;
             case 4:
+                if (players.size() == 0) {
+                    system("cls");
+                    std::cout << "This function is not available at the moment!";
+                    std::cout << "Click any key to continue.";
+                    getch();
+                    break;
+                }
                 viewMaxAverage();
                 break;
             case 5:
-                //viewMinAverage();
+                if (players.size() == 0) {
+                    system("cls");
+                    std::cout << "This function is not available at the moment!";
+                    std::cout << "Click any key to continue.";
+                    getch();
+                    break;
+                }
+                viewMinAverage();
                 break;
             case 6:
                 system("cls");
@@ -172,7 +200,7 @@ void viewMaxAverage() {
             scores[player.name].second++;
         }
     }
-    std::string name = "";
+    std::string name = "null";
     double highest = 0;
     for (auto& pair : scores) {
         double average = pair.second.first / pair.second.second;
@@ -198,7 +226,7 @@ void viewMinAverage() {
             scores[player.name].second++;
         }
     }
-    std::string name = "";
+    std::string name = "null";
     double lowest = 0;
     for (auto& pair : scores) {
         double average = pair.second.first / pair.second.second;
