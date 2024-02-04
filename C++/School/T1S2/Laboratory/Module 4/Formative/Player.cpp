@@ -2,5 +2,7 @@
 
 struct Player {
     std::string name;
-    int score;
+    int age;
+    int score1;
+    int score2;
 };

@@ -4,7 +4,6 @@
 
 std::vector<Player> players = {};
 
-void loadPlayers();
 void addRecord();
 void viewPlayersRecord();
 void viewAverage();
@@ -12,8 +11,6 @@ void viewMaxAverage();
 void viewMinAverage();
 
 int main() {
-    loadPlayers();
-
     bool repeat = true;
     while (repeat) {
         int choice = 0;
@@ -88,34 +85,6 @@ int main() {
     return 0;
 }
 
-void loadPlayers() {
-    std::ifstream db("database.txt");
-    if (!db.is_open())
-        return;
-
-    std::string data;
-    db >> data;
-    std::string name = "";
-    std::string builder = "";
-
-    for (char c : data) {
-        if (c == ',') {
-            name = builder;
-            builder = "";
-            continue;
-        }
-        if (c == ';') {
-            Player player = {name, std::stoi(builder)};
-            players.push_back(player);
-            builder = "";
-            name = "";
-            continue;
-        }
-        builder += c;
-    }
-    db.close();
-}
-
 void addRecord() {
     std::string name = "";
     do {
@@ -128,29 +97,31 @@ void addRecord() {
                 tName += c;
     } while (3 > name.length() || name.length() > 16);
 
-    int score = -1;
+    int age = -1;
     do {
         system("cls");
-        std::cout << "What is the score?\n> ";
-        std::cin >> score;
-    } while (0 > score);
+        std::cout << "What is the age?\n> ";
+        std::cin >> age;
+    } while (0 > age);
+
+    int score1 = -1;
+    do {
+        system("cls");
+        std::cout << "What is the first score?\n> ";
+        std::cin >> score1;
+    } while (0 > score1);
+
+    int score2 = -1;
+    do {
+        system("cls");
+        std::cout << "What is the second score?\n> ";
+        std::cin >> score2;
+    } while (0 > score2);
     system("cls");
 
     std::cout << "Creating player data...\n";
-    Player player = {name, score};
+    Player player = {name, age, score1, score2};
     players.push_back(player);
-
-    system("cls");
-    std::cout << "Saving player data...\n";
-
-    std::ofstream db("database.txt", std::ios_base::app);
-    if (!db.is_open()) {
-        std::cout << "Error let's go!"; // Stay positive.
-        return;
-    }
-    std::cout << "Saving data...\n";
-    db << name << "," << score << ";";
-    db.close();
 
     std::cout << "New player data has been recorded!";
 }
@@ -165,12 +136,10 @@ void viewPlayersRecord() {
         int limit = std::min(int(players.size()), 10 * tempPage);
         int start = (page - 1) * 10;
         std::cout << "Page   :\t" << page << "\t/\t" << pages << "\nRecords:\t" << limit << "\t/\t" << players.size() << "\n";
+            std::cout << std::setw(12) << std::left << "Placement" << std::setw(20) << "Username" << std::setw(10) << "Age" << std::setw(10) << "Score 1" << std::setw(10) << "Score 2" << "\n";
         for (int i = start; i < limit; i++) {
             Player player = players[i];
-            std::cout << "#" << (i + 1) << "\t" << player.name;
-            for (int i = 0; i < 20-player.name.length(); i++)
-                std::cout << " ";
-            std::cout << player.score << "\n";
+            std::cout << std::setw(12) << std::left << ("#" + std::to_string(i + 1)) << std::setw(20) << player.name << std::setw(10) << player.age << std::setw(10) << player.score1 << std::setw(10) << player.score2 << "\n";
         }
         do {
             std::cout << "\nWhich page would you like to view? [1-" << pages << " | 0 = Exit]\n> ";
@@ -183,59 +152,39 @@ void viewPlayersRecord() {
 void viewAverage() {
     int total = 0;
     for (Player player : players)
-        total += player.score;
+        total += player.score1 + player.score2;
     system("cls");
     std::cout << "The average score is " << (total/double(players.size())) << ".";
+    std::cout << "Click any key to continue.";
+    getch();
 }
 
 void viewMaxAverage() {
-    std::unordered_map<std::string, std::pair<double, int>> scores;
-    for (const Player& player : players) {
-        if (scores.find(player.name) == scores.end()) {
-            std::pair<double, int> scorePair = { player.score, 1 };
-            scores[player.name] = scorePair;
-        }
-        else {
-            scores[player.name].first += player.score;
-            scores[player.name].second++;
-        }
-    }
     std::string name = "null";
     double highest = 0;
-    for (auto& pair : scores) {
-        double average = pair.second.first / pair.second.second;
+    for (Player player : players) {
+        double average = (player.score1 + player.score2) / 2;
         if (highest < average) {
             highest = average;
-            name = pair.first;
+            name = player.name;
         }
     }
-    std::cout << "The highest average out of " << scores.size() << " players is " << name << "'s at " << highest << "\n";
+    std::cout << "The highest average out of " << players.size() << " players is " << name << "'s at " << highest << "\n";
     std::cout << "Click any key to continue.";
     getch();
 }
 
 void viewMinAverage() {
-    std::unordered_map<std::string, std::pair<double, int>> scores;
-    for (const Player& player : players) {
-        if (scores.find(player.name) == scores.end()) {
-            std::pair<double, int> scorePair = { player.score, 1 };
-            scores[player.name] = scorePair;
-        }
-        else {
-            scores[player.name].first += player.score;
-            scores[player.name].second++;
-        }
-    }
     std::string name = "null";
-    double lowest = 0;
-    for (auto& pair : scores) {
-        double average = pair.second.first / pair.second.second;
+    double lowest = 2147483647;
+    for (Player player : players) {
+        double average = (player.score1 + player.score2) / 2;
         if (lowest > average) {
             lowest = average;
-            name = pair.first;
+            name = player.name;
         }
     }
-    std::cout << "The lowest average out of " << scores.size() << " players is " << name << "'s at " << lowest << "\n";
+    std::cout << "The lowest average out of " << players.size() << " players is " << name << "'s at " << lowest << "\n";
     std::cout << "Click any key to continue.";
     getch();
 }
