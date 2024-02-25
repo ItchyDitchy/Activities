@@ -21,7 +21,7 @@ void addRecord(const Player& player) {
     Node* newNode = new Node;
     newNode -> player = player;
     newNode -> next = head;
-    head = new Node;
+    head = newNode;
 }
 
 void viewRecords() {
@@ -63,8 +63,8 @@ void showMaxAverage() {
             cout << "Nickname: " << current->player.nickname << endl;
             cout << "Average Score: " << average << endl;
             cout << "----------------------------------" << endl;
-            current = current->next;
         }
+        current = current->next;
     }
 }
 
@@ -84,8 +84,8 @@ void showMinAverage() {
             cout << "Nickname: " << current->player.nickname << endl;
             cout << "Average Score: " << average << endl;
             cout << "----------------------------------" << endl;
-            current = current->next;
         }
+        current = current->next;
     }
 }
 
@@ -145,6 +145,7 @@ int main() {
                 showMinAverage();
                 break;
             case 6:
+                cout << "Thank you for using the program.";
                 return 0;
         }
 
