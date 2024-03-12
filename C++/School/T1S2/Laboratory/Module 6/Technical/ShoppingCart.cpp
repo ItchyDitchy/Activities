@@ -1,18 +1,16 @@
 #include <bits/stdc++.h>
 #include <conio.h>
-#include <Product.cpp>
+#include "Manager.cpp"
 
 using namespace std;
 
 class Node {
 public:
-    string item;
-    int quantity;
-    double price;
+    Product value;
     Node* next_node;
 
-    Node(string item, int quantity, double price, Node* next_node = nullptr)
-        : item(item), quantity(quantity), price(price), next_node(next_node) {}
+    Node(Product product, Node* next_node = NULL)
+        : value(product), next_node(next_node) {}
 };
 
 class ShoppingCart {
@@ -20,62 +18,86 @@ private:
     Node* head;
 
 public:
-    ShoppingCart() : head(nullptr) {}
+    ShoppingCart() : head(NULL) {}
 
-    void addItem(const Product& product, int quantity) {
-        Node* new_node = new Node(product.name, quantity, product.price);
-        if (!head) {
+    void addItem(const Product& product) {
+        Node* new_node = new Node(product);
+        if (!head)
             head = new_node;
-        } else {
+        else {
             Node* current = head;
-            while (current -> next_node) {
-                current = current -> next_node;
-            }
-            current -> next_node = new_node;
+            while (current->next_node)
+                current = current->next_node;
+            current->next_node = new_node;
         }
     }
 
-    void displayCart() {
-        Node* current = head;
-        double totalCost = 0.0;
-
-        cout << fixed << setprecision(2);
-        cout << "Shopping Cart:" << endl;
-        system("cls");
-
-        while (current) {
-            cout << current->quantity << " " << current->item << "(s) - Php"
-                 << current->price * current->quantity << endl;
-
-            totalCost += current->price * current->quantity;
-            current = current->next_node;
-        }
-        cout << "Total Cost: Php" << totalCost << endl;
-        system("cls");
+    Node* getHead() {
+        return head;
     }
 
-    void checkOut() {
-        Node* current = head;
-        double totalCost = 0.0;
-
-        cout << "Receipt:\n";
-        cout << fixed << setprecision(2);
-
-        while (current) {
-            cout << current->quantity << " " << current->item << "(s) - Php"
-                 << current->price * current->quantity << endl;
-
-            totalCost += current->price * current->quantity;
-            current = current->next_node;
-        }
-
-        cout << "Total Cost: Php" << totalCost << endl;
-        cout << "Thank you for shopping! Checkout successful.\n";
-        system("cls");
+void displayCart() {
+    system("cls");
+    if (!head) {
+        cout << "Shopping Cart is empty.\n";
+        cout << "Click any key to continue.";
         getch();
-
-        clearCart();
+        return;
     }
+
+    Node* current = head;
+    double totalCost = 0.0;
+
+    cout << fixed << setprecision(2);
+    cout << "Shopping Cart:" << endl;
+
+    while (current) {
+        Product product = current->value;
+        double cost = product.getCost();
+        cout << product.getQuantity() << "x "
+            << product.getDisplayName() << "(s) - Php "
+            << cost << endl;
+        totalCost += cost;
+        current = current->next_node;
+    }
+
+    cout << "Total Cost: Php " << totalCost << endl;
+    cout << "Click any key to continue.";
+    getch();
+}
+
+void checkOut() {
+    system("cls");
+    if (!head) {
+        cout << "Shopping Cart is empty. Cannot proceed with checkout.\n";
+        cout << "Click any key to continue.";
+        getch();
+        return;
+    }
+
+    Node* current = head;
+    double totalCost = 0.0;
+
+    cout << "Receipt:\n";
+    cout << fixed << setprecision(2);
+
+    while (current) {
+        Product product = current->value;
+        double cost = product.getCost();
+        cout << product.getQuantity() << "x "
+            << product.getDisplayName() << "(s) - Php "
+            << cost << endl;
+        totalCost += cost;
+        current = current->next_node;
+    }
+
+    cout << "Total Cost: Php " << totalCost << endl;
+    cout << "Thank you for shopping! Checkout successful.\n";
+
+    clearCart();
+    cout << "Click any key to continue.";
+    getch();
+}
 
     void clearCart() {
         Node* current = head;
@@ -84,7 +106,7 @@ public:
             current = current->next_node;
             delete temp;
         }
-        head = nullptr;
+        head = NULL;
     }
 
     ~ShoppingCart() {
