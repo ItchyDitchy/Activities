@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <conio.h>
+#include "ColorImpl.h"
 #include "Product.cpp"
 
 using namespace std;
@@ -74,3 +75,13 @@ class Manager {
             return size;
         }
 };
+
+void displayProducts(vector<Product> products) {
+    for (Product product : products) {
+        if (product.getKey().length() > 0)
+            cout << BHMAG << product.getKey() << YEL << " | "
+            << GRN << (product.getQuantity() > 0 ? to_string(product.getQuantity()) + "x " : "")
+            << WHT << titleCase(product.getDisplayName()) << YEL << " - "
+            << GRN << "Php " << product.getPrice() << (product.getQuantity() > 0 ? " » " + to_string(product.getCost()) + " PHP" : "") << "\n";
+    }
+}

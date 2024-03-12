@@ -5,7 +5,7 @@ using namespace std;
 string strip(string txt) {
     string tmp = "";
     for (char c : txt)
-        if (!isspace(c))
+        if (isalnum(c))
             tmp += c;
     return tmp;
 }

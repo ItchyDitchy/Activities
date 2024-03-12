@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 #include <conio.h>
 #include <windows.h>
-#include "ColorImpl.h"
 #include "ShoppingCart.cpp"
 
 using namespace std;
@@ -185,7 +184,10 @@ void setProducts() {
         cout << "Display Name [3-32 Characters]\n";
         cout << BLU << "> " << WHT;
         getline(cin, displayName);
-    } while (3 > displayName.length() || displayName.length() > 32);
+    } while (3 > displayName.length() ||
+        displayName.length() > 32 ||
+        manager.containsProductKey(toLower(strip(displayName))) ||
+        toLower(strip(displayName)) == "cancel");
 
     double price;
     do {
@@ -204,19 +206,10 @@ void setProducts() {
     getch();
 }
 
-void displayProducts(vector<Product> products) {
-    for (Product product : products) {
-        if (product.getKey().length() > 0)
-            cout << BHMAG << product.getKey() << YEL << " | "
-            << GRN << (product.getQuantity() > 0 ? to_string(product.getQuantity()) + "x " : "")
-            << WHT << product.getDisplayName() << YEL << " - "
-            << GRN << "Php " << product.getPrice() << (product.getQuantity() > 0 ? " » " + to_string(product.getCost()) + " PHP" : "") << "\n";
-    }
-}
 void processUserOption() {
     system("cls");
     if (manager.getSize() < 1) {
-        cout << RED << "[Error] " << WHT << "There are no products available!\n";
+        cout << REDHB << "[Error]" << WHT << " There are no products available!\n";
         cout << "Click any key to continue.";
         getch();
         return;

@@ -39,7 +39,7 @@ public:
 void displayCart() {
     system("cls");
     if (!head) {
-        cout << "Shopping Cart is empty.\n";
+        cout << REDHB << "[Error]" << WHT << " Shopping Cart is empty.\n";
         cout << "Click any key to continue.";
         getch();
         return;
@@ -51,25 +51,25 @@ void displayCart() {
     cout << fixed << setprecision(2);
     cout << "Shopping Cart:" << endl;
 
+    vector<Product> vProducts;
     while (current) {
-        Product product = current->value;
-        double cost = product.getCost();
-        cout << product.getQuantity() << "x "
-            << product.getDisplayName() << "(s) - Php "
-            << cost << endl;
-        totalCost += cost;
+        vProducts.push_back(current->value);
+        totalCost += current->value.getCost();
         current = current->next_node;
     }
 
-    cout << "Total Cost: Php " << totalCost << endl;
-    cout << "Click any key to continue.";
+    displayProducts(vProducts);
+
+    cout << "\nTotal Cost: " << GRN << "Php " << totalCost << "\n";
+    cout << WHT << "Click any key to continue.";
     getch();
 }
 
 void checkOut() {
     system("cls");
     if (!head) {
-        cout << "Shopping Cart is empty. Cannot proceed with checkout.\n";
+        cout << REDHB << "[Error]" << WHT << " Shopping Cart is empty.\n";
+        cout << "Cannot proceed with checkout.\n";
         cout << "Click any key to continue.";
         getch();
         return;
@@ -78,21 +78,23 @@ void checkOut() {
     Node* current = head;
     double totalCost = 0.0;
 
-    cout << "Receipt:\n";
+    cout << GRN << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+    cout << WHT << "Receipt:\n";
+    cout << GRN << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
     cout << fixed << setprecision(2);
 
+    vector<Product> vProducts;
     while (current) {
-        Product product = current->value;
-        double cost = product.getCost();
-        cout << product.getQuantity() << "x "
-            << product.getDisplayName() << "(s) - Php "
-            << cost << endl;
-        totalCost += cost;
+        vProducts.push_back(current->value);
+        totalCost += current->value.getCost();
         current = current->next_node;
     }
 
-    cout << "Total Cost: Php " << totalCost << endl;
-    cout << "Thank you for shopping! Checkout successful.\n";
+    displayProducts(vProducts);
+
+    cout << WHT << "Total Cost: " << GRN << "Php " << totalCost << "\n\n";
+    cout << WHT << "Thank you for shopping!\n";
+    cout << "Checkout successful.\n";
 
     clearCart();
     cout << "Click any key to continue.";
