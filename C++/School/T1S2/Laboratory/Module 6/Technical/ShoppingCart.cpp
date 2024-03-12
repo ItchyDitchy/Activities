@@ -20,7 +20,15 @@ private:
 public:
     ShoppingCart() : head(NULL) {}
 
-    void addItem(const Product& product) {
+    void addItem(Product& product) {
+        Node* current = head;
+        while (current) {
+            if (current->value.getKey() == product.getKey()) {
+                current->value.setQuantity(current->value.getQuantity() + product.getQuantity());
+                return;
+            }
+            current = current->next_node;
+        }
         Node* new_node = new Node(product);
         if (!head)
             head = new_node;
