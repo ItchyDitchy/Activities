@@ -91,7 +91,8 @@ void loadData() {
                 cout << "\n";
                 manager.addProduct(dataList[0], stod(dataList[1]));
             } else if (dataList.size() == 3) {
-                cart.addItem(Product(dataList[0], stod(dataList[1]), stoi(dataList[2])));
+                Product product = Product(dataList[0], stod(dataList[1]), stoi(dataList[2]));
+                cart.addItem(product);
             }
             dataList.clear();
             builder = "";
@@ -228,6 +229,7 @@ void processUserOption() {
         cout << WHT << "\nEnter the product key\n";
         cout << BLU << "> " << WHT;
         cin >> key;
+        key = toLower(strip(key));
     } while (!manager.containsProductKey(key) && key == "cancel");
 
     int quantity;
@@ -238,7 +240,8 @@ void processUserOption() {
         cin >> quantity;
     } while (quantity <= 0);
 
-    cart.addItem(manager.getByProductKey(key).clone(quantity));
+    Product clone = manager.getByProductKey(key).clone(quantity);
+    cart.addItem(clone);
     system("cls");
     cout << "Product added to the cart!\n";
     cout << "Click any key to continue.";
