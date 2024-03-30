@@ -66,8 +66,7 @@ int main() {
                         system("cls");
                         cout << "ID Number: ";
                         cin.clear();
-                        cout << idNumber;
-                        getch();
+                        cin >> idNumber;
                     } while (0 > idNumber);
 
                     if (isStudent(idNumber)) {
