@@ -33,6 +33,8 @@ vector<Student> searchStudent(string txt);
 Student searchStudent(long idNumber);
 bool removeRecord(long idNumber);
 
+void displayStudent(Student student);
+
 bool isLeapYear(int year);
 
 bool contains(string txt, string find);
@@ -169,14 +171,7 @@ int main() {
                     } while (1 > txt.length() || txt.length() > 30 || contains(txt, ";"));
                     vector<Student> students = searchStudent(txt);
                     for (Student student : students) {
-                        cout << "=============================\n";
-                        cout << "Student ID Number: " << student.idNumber << "\n";
-                        cout << "Full Name: " << student.fullName << "\n";
-                        cout << "Birthday: " << student.birthday << "\n";
-                        cout << "Address: " << student.address << "\n";
-                        cout << "Gender: " << genders[student.gender] << "\n";
-                        cout << "Degree Program: " << student.degreeProgram << "\n";
-                        cout << "Year Level: " << student.yearLevel << "\n";
+                        displayStudent(student);
                     }
                     cout << "\nFound " << students.size() << " students from the key.\n\n";
                 }
@@ -186,14 +181,7 @@ int main() {
                     Student* current = head;
                     int total = 0;
                     while (current != nullptr) {
-                        cout << "=============================\n";
-                        cout << "Student ID Number: " << current -> idNumber << "\n";
-                        cout << "Full Name: " << current -> fullName << "\n";
-                        cout << "Birthday: " << current -> birthday << "\n";
-                        cout << "Address: " << current -> address << "\n";
-                        cout << "Gender: " << genders[current -> gender] << "\n";
-                        cout << "Degree Program: " << current -> degreeProgram << "\n";
-                        cout << "Year Level: " << current -> yearLevel << "\n";
+                        displayStudent(*current);
                         total++;
                         current = current -> next;
                     }
@@ -215,14 +203,7 @@ int main() {
                         cout << "There is no student with that ID Number.\n";
                         break;
                     }
-                    cout << "=============================\n";
-                    cout << "Student ID Number: " << student.idNumber << "\n";
-                    cout << "Full Name: " << student.fullName << "\n";
-                    cout << "Birthday: " << student.birthday << "\n";
-                    cout << "Address: " << student.address << "\n";
-                    cout << "Gender: " << genders[student.gender] << "\n";
-                    cout << "Degree Program: " << student.degreeProgram << "\n";
-                    cout << "Year Level: " << student.yearLevel << "\n";
+                    displayStudent(student);
                     cout << "\nFound the student.\n\n";
                 }
                 break;
@@ -363,6 +344,17 @@ bool removeRecord(long idNumber) {
     }
 
     return false;
+}
+
+void displayStudent(Student student) {
+    cout << "=============================\n";
+    cout << "Student ID Number: " << student.idNumber << "\n";
+    cout << "Full Name: " << student.fullName << "\n";
+    cout << "Birthday: " << student.birthday << "\n";
+    cout << "Address: " << student.address << "\n";
+    cout << "Gender: " << genders[student.gender] << "\n";
+    cout << "Degree Program: " << student.degreeProgram << "\n";
+    cout << "Year Level: " << student.yearLevel << "\n";
 }
 
 // STRING UTILS
