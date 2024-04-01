@@ -13,7 +13,7 @@ int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 struct Student {
     Student* next;
-    long idNumber = -1;
+    long long int idNumber = -1;
     string fullName;
     string birthday;
     string address;
@@ -27,11 +27,11 @@ Student* head = nullptr;
 void loadData();
 void saveData();
 
-void addRecord(long idNumber, string fullName, string birthday, string address, int gender, string degreeProgram, int yearLevel);
-bool isStudent(long idNumber);
+void addRecord(long long int idNumber, string fullName, string birthday, string address, int gender, string degreeProgram, int yearLevel);
+bool isStudent(long long int idNumber);
 vector<Student> searchStudent(string txt);
-Student searchStudent(long idNumber);
-bool removeRecord(long idNumber);
+Student searchStudent(long long int idNumber);
+bool removeRecord(long long int idNumber);
 
 void displayStudent(Student student);
 
@@ -63,7 +63,7 @@ int main() {
         switch (choice) {
             case 1:
                 {
-                    long idNumber = -1;
+                    long long int idNumber = -1;
                     do {
                         system("cls");
                         cout << "ID Number: ";
@@ -191,7 +191,7 @@ int main() {
                 break;
             case 4:
                 {
-                    long idNumber = -1;
+                    long long int idNumber = -1;
                     do {
                         system("cls");
                         cout << "Student ID Number: ";
@@ -209,7 +209,7 @@ int main() {
                 break;
             case 5:
                 {
-                    long idNumber = -1;
+                    long long int idNumber = -1;
                     do {
                         system("cls");
                         cout << "Student ID Number: ";
@@ -248,7 +248,7 @@ void loadData() {
     while (getline(db, line)) {
         char idNumber[100], fullName[100], birthday[100], address[100], gender[100], degreeProgram[100], yearLevel[100];
         sscanf(line.c_str(), "%[^;];%[^;];%[^;];%[^;];%[^;];%[^;];%[^;]", idNumber, fullName, birthday, address, gender, degreeProgram, yearLevel);
-        addRecord(stol(idNumber), string(fullName), string(birthday), string(address), stoi(gender), string(degreeProgram), stoi(yearLevel));
+        addRecord(stoll(idNumber), string(fullName), string(birthday), string(address), stoi(gender), string(degreeProgram), stoi(yearLevel));
     }
     db.close();
 }
@@ -272,7 +272,7 @@ void saveData() {
 }
 
 // LINKED LIST & FUNCTIONS
-void addRecord(long idNumber, string fullName, string birthday, string address, int gender, string degreeProgram, int yearLevel) {
+void addRecord(long long int idNumber, string fullName, string birthday, string address, int gender, string degreeProgram, int yearLevel) {
     Student* newStudent = new Student{nullptr, idNumber, fullName, birthday, address, gender, degreeProgram, yearLevel};
 
     if (head == nullptr)
@@ -285,7 +285,7 @@ void addRecord(long idNumber, string fullName, string birthday, string address, 
     }
 }
 
-bool isStudent(long idNumber) {
+bool isStudent(long long int idNumber) {
     Student* current = head;
     while (current != nullptr) {
         current = current -> next;
@@ -311,7 +311,7 @@ vector<Student> searchStudent(string txt) {
     return students;
 }
 
-Student searchStudent(long idNumber) {
+Student searchStudent(long long int idNumber) {
     Student* current = head;
     while (current != nullptr) {
         if (current -> idNumber == idNumber)
@@ -321,7 +321,7 @@ Student searchStudent(long idNumber) {
     return Student();
 }
 
-bool removeRecord(long idNumber) {
+bool removeRecord(long long int idNumber) {
     if (head == nullptr)
         return false;
 
