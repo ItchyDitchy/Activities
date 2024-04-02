@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <conio.h>
-#include <ctime>
 
 using namespace std;
 
