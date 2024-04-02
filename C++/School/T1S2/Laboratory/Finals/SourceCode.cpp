@@ -288,6 +288,8 @@ void addRecord(long long int idNumber, string fullName, string birthday, string 
 bool isStudent(long long int idNumber) {
     Student* current = head;
     while (current != nullptr) {
+        if (current -> idNumber == idNumber)
+            return true;
         current = current -> next;
     }
     return false;
