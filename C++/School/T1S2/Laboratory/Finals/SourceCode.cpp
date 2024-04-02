@@ -218,12 +218,11 @@ int main() {
 
                     if (removeRecord(idNumber)) {
                         cout << "Student Record with ID Number " << idNumber << " has been removed.\n";
+                        saveData();
                         break;
                     }
 
-                    cout << "There isn o student with that ID Number.\n";
-
-                    saveData();
+                    cout << "There is no student with that ID Number.\n";
                 }
                 break;
             case 6:
