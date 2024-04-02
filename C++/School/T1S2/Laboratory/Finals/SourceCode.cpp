@@ -66,7 +66,7 @@ int main() {
                     long long int idNumber = -1;
                     do {
                         system("cls");
-                        cout << "ID Number: ";
+                        cout << "ID Number [Number]: ";
                         cin.clear();
                         cin >> idNumber;
                     } while (0 > idNumber);
@@ -80,7 +80,7 @@ int main() {
                     string fullName;
                     do {
                         system("cls");
-                        cout << "Full Name: ";
+                        cout << "Full Name [Text]: ";
                         cin.clear();
                         getline(cin, fullName);
                     } while (fullName.empty() || fullName.length() > 100 || contains(fullName, ";"));
@@ -88,7 +88,7 @@ int main() {
                     int year = -1;
                     do {
                         system("cls");
-                        cout << "Birth Year: ";
+                        cout << "Birth Year [Number]: ";
                         cin.clear();
                         cin >> year;
                     } while (1900 > year);
@@ -115,7 +115,7 @@ int main() {
                     int day = -1;
                     do {
                         system("cls");
-                        cout << "Birth day: ";
+                        cout << "Birth day [Number]: ";
                         cin.clear();
                         cin >> day;
                     } while (0 > day || day > days[month-1] + (month == 2 && isLeapYear(year) ? 1 : 0));
@@ -123,7 +123,7 @@ int main() {
                     string address;
                     do {
                         system("cls");
-                        cout << "Address: ";
+                        cout << "Address [Text]: ";
                         cin.clear();
                         getline(cin, address);
                     } while (address.empty() || address.length() > 100 || contains(address, ";"));
@@ -134,7 +134,7 @@ int main() {
                         cout << "1. Male\n";
                         cout << "2. Female\n";
                         cout << "3. Other\n";
-                        cout << "Gender: ";
+                        cout << "Gender [Number]: ";
                         cin.clear();
                         cin >> gender;
                     } while (1 > gender || gender > 3);
@@ -142,7 +142,7 @@ int main() {
                     string degreeProgram;
                     do {
                         system("cls");
-                        cout << "Degree Program: ";
+                        cout << "Degree Program [Text]: ";
                         cin.clear();
                         getline(cin, degreeProgram);
                     } while (degreeProgram.empty() || degreeProgram.length() > 100 || contains(degreeProgram, ";"));
@@ -150,7 +150,7 @@ int main() {
                     int yearLevel = -1;
                     do {
                         system("cls");
-                        cout << "Year Level: ";
+                        cout << "Year Level [Integer]: ";
                         cin.clear();
                         cin >> yearLevel;
                     } while (1 > yearLevel || yearLevel > 16);
@@ -165,7 +165,7 @@ int main() {
                     string txt = "";
                     do {
                         system("cls");
-                        cout << "Text to find: ";
+                        cout << "Text to find [Text]: ";
                         cin.clear();
                         getline(cin, txt);
                     } while (1 > txt.length() || txt.length() > 30 || contains(txt, ";"));
@@ -194,7 +194,7 @@ int main() {
                     long long int idNumber = -1;
                     do {
                         system("cls");
-                        cout << "Student ID Number: ";
+                        cout << "Student ID Number [Number]: ";
                         cin >> idNumber;
                     } while (0 > idNumber);
 
@@ -212,7 +212,7 @@ int main() {
                     long long int idNumber = -1;
                     do {
                         system("cls");
-                        cout << "Student ID Number: ";
+                        cout << "Student ID Number [Number]: ";
                         cin >> idNumber;
                     } while (0 > idNumber);
 
