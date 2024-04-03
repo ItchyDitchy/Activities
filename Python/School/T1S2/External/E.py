@@ -1,0 +1,1 @@
+members = ["Gandalf", "Aragorn", "Boromir", "Legolas", "Gimli", "Frodo", "Sam", "Merry", "Pippin"]
