@@ -34,8 +34,8 @@ class Array1D {
                 cout << "Unable to insert element due to max capacity!";
                 return;
             }
-            for (int i = pos; i < size; i++)
-                array[i + 1] = array[i];
+            for (int i = size; i > pos; i--)
+                array[i] = array[i - 1];
             array[pos] = val;
             size++;
         }
@@ -48,20 +48,37 @@ class Array1D {
 
         void addItem(int val) {
             if (isFull()) {
-                cout << "Cannot add item due to max capacity!";
+                cout << "Cannot add item due to max capacity!" << endl;
                 return;
             }
             array[size++] = val;
         }
 
         void displayElements() {
-            cout << "\nArray: [" << array[0];
+            cout << "Array: [" << array[0];
             for (int i = 1; i < size; i++)
                 cout << ", " << array[i];
-            cout << "]";
+            cout << "]\n";
         }
 };
 
 int main() {
+    Array1D arr(5);
+    arr.addItem(10);
+    arr.addItem(20);
+    arr.addItem(30);
+    arr.displayElements();
+    arr.insertItem(1, 15);
+    arr.displayElements();
+    arr.addItem(40);
+    arr.displayElements();
+    arr.addItem(50);
+    arr.removeItem(0);
+    arr.displayElements();
+    cout << "Array Size: " << arr.getSize() << endl;
+    if (arr.isEmpty())
+        cout << "Array is empty!" << endl;
+    else
+        cout << "Array is not empty!" << endl;
     return 0;
 }
