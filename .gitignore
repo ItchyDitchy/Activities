@@ -60,5 +60,5 @@ temp.*
 demo.*
 
 # Database files
-database.txt
 *.db
+*.txt
