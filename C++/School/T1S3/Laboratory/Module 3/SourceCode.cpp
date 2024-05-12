@@ -175,6 +175,7 @@ int main() {
           cout << "List is empty\n";
         else
           cout << "List is not empty\n";
+        break;
       case 9:
         if (list.isFull())
           cout << "List is full\n";
