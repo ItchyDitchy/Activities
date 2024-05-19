@@ -62,3 +62,4 @@ demo.*
 # Database files
 *.db
 *.txt
+/Demo/
