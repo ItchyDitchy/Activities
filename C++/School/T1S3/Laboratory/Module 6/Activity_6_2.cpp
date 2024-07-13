@@ -8,7 +8,6 @@ void towerOfHanoi(int num, char a = 'A', char b = 'B', char c = 'C') {
     cout << "Disk " << num << " moved from " << a << " to " << c << endl;
     return;
   }
-
   towerOfHanoi(num - 1, a, c, b);
   cout << "Disk " << num << " moved from " << a << " to " << c << endl;
   towerOfHanoi(num - 1, b, a, c);
